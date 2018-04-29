@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
 
@@ -21,15 +22,36 @@ type Address struct {
 var users []User
 
 func populateData() {
-	users = append(users, User{ID: "1", Firstname: "John", Lastname: "Doe", Address: &Address{City: "City X", State: "State X"}})
-	users = append(users, User{ID: "2", Firstname: "Koko", Lastname: "Doe", Address: &Address{City: "City Z", State: "State Y"}})
-	users = append(users, User{ID: "3", Firstname: "Francis", Lastname: "Sunday"})
+	users = append(users, User{
+		ID:        "1",
+		Firstname: "Frank",
+		Lastname:  "Willis",
+		Address:   &Address{City: "A City", State: "B State"},
+	})
+	users = append(users, User{
+		ID:        "2",
+		Firstname: "Michelle",
+		Lastname:  "Doe",
+		Address: &Address{
+			City:  "B City",
+			State: "B State"},
+	})
+	users = append(users, User{
+		ID:        "3",
+		Firstname: "William",
+		Lastname:  "Sully"},
+	)
 }
 
 func GetUser(w http.ResponseWriter, r *http.Request)    {}
 func GetUsers(w http.ResponseWriter, r *http.Request)   {}
 func CreateUser(w http.ResponseWriter, r *http.Request) {}
 func DeleteUser(w http.ResponseWriter, r *http.Request) {}
+
+// get all users
+func GetUsers(w http.ResponseWriter, r *http.Request) {
+	json.NewEncoder(w).Encode(users)
+}
 
 // our main function
 func main() {
