@@ -49,6 +49,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {}
 func DeleteUser(w http.ResponseWriter, r *http.Request) {}
 
 // get all users
+// return json
 func GetUsers(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(users)
 }
